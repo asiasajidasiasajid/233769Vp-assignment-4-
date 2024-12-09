@@ -1,0 +1,75 @@
+
+MainWindow.xaml:
+
+```
+<Window x:Class="CricketTeamManager.MainWindow"
+        xmlns="(link unavailable)"
+        xmlns:x="(link unavailable)"
+        Title="Cricket Team Manager" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0" Grid.Row="0" Text="Cricket Team Manager" FontSize="24"/>
+        <TextBox Grid.Column="0" Grid.Row="1" x:Name="playerNameTextBox" Width="200"/>
+        <Button Grid.Column="1" Grid.Row="1" x:Name="addPlayerButton" Content="Add Player" Click="AddPlayerButton_Click"/>
+        <Button Grid.Column="1" Grid.Row="2" x:Name="removePlayerButton" Content="Remove Player" Click="RemovePlayerButton_Click"/>
+        <ListBox Grid.Column="0" Grid.Row="2" x:Name="playerListBox" Width="200" Height="200"/>
+    </Grid>
+</Window>
+```
+
+MainWindow.xaml.cs:
+
+```
+using System.Collections.ObjectModel;
+using System.Windows;
+
+namespace CricketTeamManager
+{
+    public partial class MainWindow : Window
+    {
+        private ObservableCollection<string> players = new ObservableCollection<string>();
+
+        public MainWindow()
+        {
+            InitializeComponent();
+            playerListBox.ItemsSource = players;
+        }
+
+        private void AddPlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            string playerName = playerNameTextBox.Text.Trim();
+            if (!string.IsNullOrEmpty(playerName) && !players.Contains(playerName))
+            {
+                players.Add(playerName);
+                playerNameTextBox.Clear();
+                MessageBox.Show("Player added successfully!", "Success");
+            }
+            else
+            {
+                MessageBox.Show("Player name is empty or already exists!", "Error");
+            }
+        }
+
+        private void RemovePlayerButton_Click(object sender, RoutedEventArgs e)
+        {
+            string selectedPlayer = playerListBox.SelectedItem as string;
+            if (!string.IsNullOrEmpty(selectedPlayer))
+            {
+                players.Remove(selectedPlayer);
+                MessageBox.Show("Player removed successfully!", "Success");
+            }
+            else
+            {
+                MessageBox.Show("No player selected!", "Error");
+            }
+        }
+    }
+}
