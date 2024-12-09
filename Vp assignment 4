@@ -1,7 +1,6 @@
 
 MainWindow.xaml:
 
-```
 <Window x:Class="CricketTeamManager.MainWindow"
         xmlns="(link unavailable)"
         xmlns:x="(link unavailable)"
@@ -22,12 +21,11 @@ MainWindow.xaml:
         <Button Grid.Column="1" Grid.Row="2" x:Name="removePlayerButton" Content="Remove Player" Click="RemovePlayerButton_Click"/>
         <ListBox Grid.Column="0" Grid.Row="2" x:Name="playerListBox" Width="200" Height="200"/>
     </Grid>
-</Window>
-```
+</Window/>
 
 MainWindow.xaml.cs:
 
-```
+
 using System.Collections.ObjectModel;
 using System.Windows;
 
